@@ -1,16 +1,16 @@
 import nox
+import argparse
+
+nox.options.stop_on_first_error = True
+nox.options.reuse_existing_virtualenvs = True
+
+# default to the testing sessions
+nox.options.sessions = ["black", "lint", "spell_check", "tests", "docs", "wheel"]
 
 locations = "sub3", "tests", "noxfile.py"
 
 
-@nox.session(python=["3.10"])
-def tests(session):
-    session.install("-e", ".")
-    session.install("-r", "tests/requirements.txt")
-    session.run("pytest")
-
-
-@nox.session(reuse_venv=True, python="3.10")
+@nox.session(python="3.10")
 def black(session):
     """Run black code formatter."""
 
@@ -18,7 +18,7 @@ def black(session):
     session.run("black", *locations)
 
 
-@nox.session(reuse_venv=True, python="3.10")
+@nox.session(python="3.10")
 def lint(session):
     session.install("flake8", "black")
     session.run("flake8", "--version")
@@ -36,12 +36,23 @@ def spell_check(session):
     session.run(
         "sphinx-build", "-W", "-b", "spelling", "-v", "docs/", "docs/_build/html"
     )
+
+
+@nox.session(python=["3.10"])
+def tests(session):
+    session.install("-e", ".")
+    session.install("-r", "tests/requirements.txt")
+    session.run("pytest")
+
+
+@nox.session(python="3.10")
 def docs(session):
     session.install("-e", ".")
     session.install("-r", "docs/requirements.txt")
 
     # Generate documentation into `build/docs`
     session.run("sphinx-build", "-W", "-b", "html", "-v", "docs/", "docs/_build/html")
+
 
 @nox.session(python="3.10")
 def wheel(session):
