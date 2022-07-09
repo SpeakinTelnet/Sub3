@@ -27,7 +27,15 @@ def lint(session):
     session.run("flake8", *locations)
 
 
-@nox.session(reuse_venv=True, python="3.10")
+@nox.session(python="3.10")
+def spell_check(session):
+    session.install("-e", ".")
+    session.install("-r", "docs/requirements.txt")
+
+    # Generate documentation into `build/docs`
+    session.run(
+        "sphinx-build", "-W", "-b", "spelling", "-v", "docs/", "docs/_build/html"
+    )
 def docs(session):
     session.install("-e", ".")
     session.install("-r", "docs/requirements.txt")
