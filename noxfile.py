@@ -35,6 +35,15 @@ def docs(session):
     # Generate documentation into `build/docs`
     session.run("sphinx-build", "-W", "-b", "html", "-v", "docs/", "docs/_build/html")
 
+@nox.session(python="3.10")
+def wheel(session):
+    session.install("twine", "wheel")
+
+    # Generate documentation into `build/docs`
+    session.run("python", "setup.py", "sdist", "bdist_wheel")
+    session.run("twine", "check", "dist/*")
+
+
 @nox.session
 def release(session: nox.Session) -> None:
 
