@@ -6,6 +6,7 @@ from typing import Optional, Union
 from platform import python_version
 import aiohttp
 
+
 async def shutdown(signal, loop, log):
     """Cleanup tasks tied to the service's shutdown."""
     log.error(f"Received exit signal {signal.name}...")
@@ -24,14 +25,20 @@ class Sub3:
     :type server_url: str
     :param rpc: Standard RPC PubSub
     :type rpc: Union[str, dict]
+    :param logger: Custom logger, will create one if this is not provided.
+    :type logger: Optional[logging.Logger], optional
+
 
     .. seealso:: https://geth.ethereum.org/docs/rpc/pubsub
 
     """
 
-    def __init__(self, server_url: str,
-                 rpc: Union[str, dict],
-                 logger: Optional[logging.Logger] = None):
+    def __init__(
+        self,
+        server_url: str,
+        rpc: Union[str, dict],
+        logger: Optional[logging.Logger] = None,
+    ):
 
         if isinstance(rpc, dict):
             self.rpc = json.dumps(rpc)
@@ -39,8 +46,9 @@ class Sub3:
             self.rpc = rpc
 
         if not logger:
-            logging.basicConfig(level=logging.INFO,
-                    format='%(levelname)-8s %(message)s')
+            logging.basicConfig(
+                level=logging.INFO, format="%(levelname)-8s %(message)s"
+            )
             self.log = logging.getLogger(__name__)
         else:
             self.log = logger
@@ -99,12 +107,12 @@ class Sub3:
             await self.on_disconnect()
 
     async def on_connect(self, connection_mess):
-        """This is called after a successfull connection"""
+        """This is called after a successful connection"""
 
         self.log.info(connection_mess)
 
     async def on_request_error(self, error: str):
-        """This is called when the rpc request returned an error"""
+        """This is called when the RPC request returned an error"""
 
         self.log.error(error)
 
@@ -120,12 +128,12 @@ class Sub3:
         self.log.info(raw_data)
 
     async def on_closed(self):
-        """This is called when the websocket has been closed"""
+        """This is called when the WebSocket has been closed"""
 
-        self.log.error("Received a closed websocket message")
+        self.log.error("Received a closed WebSocket message")
 
     async def on_connection_error(self, error: str):
-        """This is called after a connection error from the websocket"""
+        """This is called after a connection error from the WebSocket"""
 
         self.log.error(error)
 
@@ -135,6 +143,6 @@ class Sub3:
         self.log.error(repr(exception))
 
     async def on_disconnect(self):
-        """This is called when the websocket has disconnected"""
+        """This is called when the WebSocket has disconnected"""
 
         self.log.info("disconnected")

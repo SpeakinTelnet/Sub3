@@ -1,16 +1,14 @@
 import asyncio
-import json
 import logging
-import os
-from signal import SIGINT, SIGTERM
 from typing import Optional, Union
 import aiohttp
-from aiohttp import WSCloseCode, WSServerHandshakeError, web
+from aiohttp import web
 import multiprocessing
 import nest_asyncio
 import pytest
 from time import sleep
 from sub3 import Sub3
+
 
 async def websocket_handler(request):
 
@@ -21,30 +19,30 @@ async def websocket_handler(request):
         if msg.type == aiohttp.WSMsgType.TEXT:
             match msg.data:
                 case '{"data": "successful test"}':
-                    confirmation = {'result': 'success'}
+                    confirmation = {"result": "success"}
                     await ws.send_json(confirmation)
                     await asyncio.sleep(0.01)
-                    data = {'result': 'data'}
+                    data = {"result": "data"}
                     await ws.send_json(data)
                     await ws.close()
                 case '{"data": "unsuccessful test"}':
-                    await ws.send_json({'error': "failure"})
+                    await ws.send_json({"error": "failure"})
                     await ws.close()
                 case '{"data": "keepalive"}':
-                    confirmation = {'result': 'success'}
+                    confirmation = {"result": "success"}
                     await ws.send_json(confirmation)
 
-
-    print('websocket connection closed')
+    print("websocket connection closed")
 
     return ws
+
 
 @pytest.fixture(autouse=True, scope="session")
 def start_server():
     nest_asyncio.apply()
     app = web.Application()
-    app.add_routes([web.get('/ws', websocket_handler)])
-    p = multiprocessing.Process(target=web.run_app, args=(app, ))
+    app.add_routes([web.get("/ws", websocket_handler)])
+    p = multiprocessing.Process(target=web.run_app, args=(app,))
     p.start()
     sleep(0.5)
     yield
@@ -52,11 +50,12 @@ def start_server():
 
 
 class NewSub3(Sub3):
-
-    def __init__(self,
-                server_url: str,
-                rpc: Union[str, dict],
-                logger: Optional[logging.Logger] = None):
+    def __init__(
+        self,
+        server_url: str,
+        rpc: Union[str, dict],
+        logger: Optional[logging.Logger] = None,
+    ):
         super().__init__(server_url, rpc, logger)
         self.closed = False
         self.disconnected = False
@@ -66,7 +65,7 @@ class NewSub3(Sub3):
 
     async def on_request_error(self, error: str):
         self.request_error = error
-        
+
     async def on_confirmation(self, confirmation: str):
         self.confirmation = confirmation
 
@@ -79,13 +78,15 @@ class NewSub3(Sub3):
     async def on_disconnect(self):
         self.disconnected = True
 
-class ErrSub3(Sub3):
 
-    def __init__(self,
-                server_url: str,
-                rpc: Union[str, dict],
-                exception: Exception,
-                logger: Optional[logging.Logger] = None):
+class ErrSub3(Sub3):
+    def __init__(
+        self,
+        server_url: str,
+        rpc: Union[str, dict],
+        exception: Exception,
+        logger: Optional[logging.Logger] = None,
+    ):
         super().__init__(server_url, rpc, logger)
         self.exception = exception
         self.connect_exception = False
