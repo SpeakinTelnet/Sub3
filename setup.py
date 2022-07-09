@@ -9,6 +9,7 @@ with open('README.rst') as readme_file:
 
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
+
 requirements = ["aiohttp"]
 
 test_requirements = ['pytest>=3',]
@@ -28,11 +29,12 @@ setup(
     description="A Python aiohttp wrapper client to subscribe to the Ethereum JSON-RPC PubSub endpoints." ,
     install_requires=requirements,
     license='License :: OSI Approved :: MIT License',
+    long_description_content_type='text/x-rst',
     long_description=readme + '\n\n' + history,
     include_package_data=True,
     keywords='Sub3',
     name='Sub3',
-    packages=find_packages(include=['sub3.*']),
+    packages=['sub3'],
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/SpeakinTelnet/Sub3',
