@@ -7,4 +7,4 @@ __all__ = ["Sub3", "RPCMaker"]
 
 __author__ = """SpeakinTelnet"""
 __email__ = "gui.lac@protonmail.com"
-__version__ = "0.0.2"
+__version__ = "0.0.3"
