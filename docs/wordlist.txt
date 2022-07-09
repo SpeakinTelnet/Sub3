@@ -9,6 +9,7 @@ Monero
 Nethermind
 nox
 Peercoin
+Pypi
 tBS
 URL
 WebSocket
