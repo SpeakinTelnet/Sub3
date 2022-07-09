@@ -10,7 +10,7 @@ Installation
 
 .. readme-install-start
 
-Web3-Subscriber can be installed using ``pip`` as follows:
+Sub3 can be installed using ``pip`` as follows:
 
 .. code-block:: console
 

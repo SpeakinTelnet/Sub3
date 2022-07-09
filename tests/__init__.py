@@ -1,1 +1,1 @@
-"""Unit test package for Web3_Subscriber."""
+"""Unit test package for Sub3."""

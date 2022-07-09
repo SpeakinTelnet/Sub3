@@ -1,4 +1,4 @@
-"""Top-level package for Web3_Subscriber."""
+"""Top-level package for Sub3."""
 
 from sub3.main import Sub3
 from sub3.rpc_maker import RPCMaker

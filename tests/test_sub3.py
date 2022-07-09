@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""Tests for `Web3_Subscriber` package."""
+"""Tests for `Sub3` package."""
 
 import json
 import logging
@@ -10,8 +10,6 @@ import aiohttp
 from signal import SIGINT
 import time
 from tests.conftest import NewSub3, ErrSub3
-
-# from web3_subscriber import RPCMaker, SubscriberClient
 
 
 async def test_successful_request():
