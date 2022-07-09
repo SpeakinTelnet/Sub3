@@ -2,40 +2,44 @@
 
 """The setup script."""
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
-with open('README.rst') as readme_file:
+with open("README.rst") as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
+with open("HISTORY.rst") as history_file:
     history = history_file.read()
+
 requirements = ["aiohttp"]
 
-test_requirements = ['pytest>=3',]
+test_requirements = [
+    "pytest>=3",
+]
 
 setup(
     author="SpeakinTelnet",
-    author_email='gui.lac@protonmail.com',
-    python_requires='>=3.10',
+    author_email="gui.lac@protonmail.com",
+    python_requires=">=3.10",
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Natural Language :: English',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.10',
+        "Development Status :: 2 - Pre-Alpha",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Natural Language :: English",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
     ],
-    description="A Python aiohttp wrapper client to subscribe to the Ethereum JSON-RPC PubSub endpoints." ,
+    description="A Python aiohttp wrapper client to subscribe to the Ethereum JSON-RPC PubSub endpoints.",  # noqa: E501
     install_requires=requirements,
-    license='License :: OSI Approved :: MIT License',
-    long_description=readme + '\n\n' + history,
+    license="License :: OSI Approved :: MIT License",
+    long_description_content_type="text/x-rst",
+    long_description=readme + "\n\n" + history,
     include_package_data=True,
-    keywords='Sub3',
-    name='Sub3',
-    packages=find_packages(include=['sub3.*']),
-    test_suite='tests',
+    keywords="Sub3",
+    name="Sub3",
+    packages=["sub3"],
+    test_suite="tests",
     tests_require=test_requirements,
-    url='https://github.com/SpeakinTelnet/Sub3',
-    version='0.0.1',
+    url="https://github.com/SpeakinTelnet/Sub3",
+    version="0.0.3",
     zip_safe=False,
 )

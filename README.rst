@@ -10,7 +10,7 @@ Installation
 
 .. readme-install-start
 
-Web3-Subscriber can be installed using ``pip`` as follows:
+Sub3 can be installed using ``pip`` as follows:
 
 .. code-block:: console
 
@@ -129,13 +129,5 @@ If you like it and wish to donate here's a few of my crypto wallets.
 
 * Free software: MIT
 * Documentation: https://Sub3.readthedocs.io.
-
-Features
---------
-
-* TODO
-
-Credits
--------
 
 ⊂(▀¯▀⊂)

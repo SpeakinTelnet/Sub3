@@ -46,8 +46,11 @@ Then run
 
 .. code-block:: console
 
-   $ bump2version patch
-   $ git push  
-   $ git push --tags
+    $ nox -s release -- patch
+
+    #  "major", "minor", "patch"
+    #     \____,   |   ,___|
+    #          1 . 0 . 0
+
 
 CircleCI will then deploy to PyPI if tests pass.
