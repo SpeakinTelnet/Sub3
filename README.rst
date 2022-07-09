@@ -1,3 +1,4 @@
+====
 Sub3
 ====
 
@@ -28,7 +29,7 @@ for the in-depth usage.
 Prerequisite
 ************
 
-- The url to a node that has a websocket port opened. This can be either from a 
+- The URL to a node that has a WebSocket port opened. This can be either from a 
   provider like `infura <https://infura.io>`_ or through a self-hosted Geth/Nethermind node.
 
 Create a basic subscription
@@ -61,8 +62,8 @@ by doing the following:
          }
 
 
-Subclassing
-***********
+Sub-classing
+************
 
 The data processing can easily be customized by sub-classing the ``Sub3`` class
 like so:
@@ -89,7 +90,7 @@ like so:
         sub.start()
 
 .. Note:: 
-  Take note that the functions are async. if you don't define them as such the client
+  Take note that the functions are Async. if you don't define them as such the client
   will raise an error.
 
 

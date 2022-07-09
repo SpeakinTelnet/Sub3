@@ -2,8 +2,7 @@
 Welcome to Sub3's documentation!
 ================================
 
-A Python websocket client to easily subscribe to the Ethereum JSON-RPC PubSub
-endpoints.
+A Python aiohttp wrapper client to subscribe to the Ethereum JSON-RPC PubSub endpoints.
 
 
 Installation
