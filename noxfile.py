@@ -7,7 +7,7 @@ nox.options.reuse_existing_virtualenvs = True
 # default to the testing sessions
 nox.options.sessions = ["black", "lint", "spell_check", "tests", "docs", "wheel"]
 
-locations = "sub3", "tests", "noxfile.py"
+locations = "sub3", "tests", "noxfile.py", "setup.py"
 
 
 @nox.session(python="3.10")
